@@ -1,0 +1,71 @@
+Algorithm for Implementation of genetic algorithm for bin packing problem
+
+Let there be m objects to be packed in n number of bins where k is the maximum capacity of each bin.then,
+
+Step-1. Randomly generate the weight of objects in the range of 1 to 20 and store it in an array.
+
+Let the number of cycles be n.for 0<=i<n, repeat the following steps.
+
+Step-2. Initialize the weight of each bin to 50.
+
+Step-3. Generate initial population of solutions for the problem and store them in a 3-d array.
+
+Step-3.1. Set x=1 where x represents the objects to be placed in bin.
+
+Step-3.2  Generate a random bin between 0 to n-1 which represents the bin in which the objects is to placed.
+ 
+Step-3.3. if(weight of given item<=weight of randomly selected bin)
+          ->place the item in the given bin;
+          ->weight of bin=weight of bin-weight of given item.;
+           Else repeat step 3.2 and step 3.3.
+
+Step-3.4. set x=x+1.
+Step-3.5. if x>m, Stop the algorithm.
+
+Step-4. Generate the new solutions by applying the crossover operator on the initial population and store the new solutions in another 3d array.set v=0 where v represents the number of solutions into the crossover 3-d array.
+
+          repeat the following steps until all the solutions are covered.
+
+Step-4.1. Select 2 solutions from the initial poluation ci and cj where j=i+1 respectively.let the two crossover solutions generated be s1 and s2.
+
+Step-4.2. Randomly generate 2 variables rr and rc which represents the 2d crossover point.
+
+Step-4.3. for 1<=c<=n and 1<=d<=m, if row(c)<rr,then for 1<=col(d)<=m, copy values of ci(row(c),col(d)) to s1 and cj(row(c),col(d)) to s2.
+
+Step-4.4. if row(c)==rr, then for 1<=col(d)<=rc,copy values of ci(row(c),col(d)) to s1 and cj(row(c),col(d)) to s2 and for rc<=col(d)<=m,ci(row(c),col(d)) to s2 and cj(row(c),col(d)) to s1.
+
+Step-4.5. if row(c)>rr, then for 1<=col(d)<=rc,copy values of ci(row(c),col(d)) to s2 and cj(row(c),col(d)) to s1.
+
+Step-4.6. for each pair of intial solution,Store the 2 newly generated solutions into another 3-d array and set v=v+2.
+
+Step-5. Repair the newly geenrated solutions on the basis of following constraints-
+        a. The capacity of items in the bin should not exceed the capacity of bin
+        b. Each item should be placed in exactly 1 bin.
+
+Step-6. Perform the mutation operator on the new solutions based on the mutation probability mp.
+
+Step-6.1. Select a solution ci from the crossover solutions.
+
+Step-6.2. Generate a random number z between 0 and 1.If z>mp,stop and select next solution else perform the following steps.
+
+Step-6.3. randomly generate two integers r1 and c1 where 1<=r1<=n and 1<=c1<=m.
+
+Step-6.4. randomly genrate another pair of integers r2 and c2 where 1<=r2<=n and 1<=c2<=m.if r1=c1 and r2=c2 then repeat this step and generate another pair of r2 and c2.
+
+Step-6.5. interchange ci(r1,c1) and ci(r2,c2).
+
+Step-7. Store the initial solutions and the solutions after crossover and mutation into a 3-d array.
+
+Fitness of a solution is determined by the number of empty bins in a solution.
+Step-8. Calculate the fitness of each solution and the solution with highest fitness is the best solution for the given cycle.
+
+
+
+
+
+
+
+
+
+
+
