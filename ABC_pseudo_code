@@ -1,0 +1,97 @@
+Let there be m objects and n bins where k is maximum capacity of each bin.
+
+Step-1. for i=0 to m-1
+                  Assign weights to item in the range of 1 to 20.
+
+Step-2. for i=0 to n-1
+                  Initialize weight of each bin to 50
+
+Step-3. for i=0 to n-1
+                  for k=0 to m-1
+                         generate a random bin between 0 to n-1 
+                          if(weight of given item<=left bin weight of randomly selected bin)
+                                       place the given item in selected bin
+                                       left weight of bin=left weight of bin-weight of given item
+                          else generate other bin and repeat the process
+                   if(i==n) 
+                         stop the algorithm.
+Step4. Calculate the fitness of each solution in the population.
+            for i=0 to totalsolutions-1
+                      if (bin weight==50)
+                                     Fitness value++
+                      Fitness of solution=fitness value
+            repeat the cycles until the stopping criteria is met.
+
+Step-5. send employed bees 
+              for i=0 to initialsolution-1
+                    Select a random solution from initial solutions.
+                    for j=0 to n-1
+                            for j=0 to m-1
+                                   Copy the initial solution i and the selected solution into arrays c1 and c2.
+                                   s1 is the new solution.
+                                   Generate a new solution using c1 and c2 as stated in step6.
+
+Step6. Generate two random variables rr and rc between 0 to m-1 and n-1 respectively.
+            Generate a random variable x between 0 to 9.
+            jf(x<5)
+                     for c=0 to n-1 and d=0 to m-1
+                           if (rowc < rr) 
+                                    for cold =0 to n-1
+                                            copy values of c1 (rowc, cold) to s1.
+                              if (rowc = rr) 
+                                        for cold =0 to rc-1
+                                                      copy values of c1 (rowc, cold) to s1.
+                                        for cold =rc to n-1
+                                                      copy values of c2(rowc, cold) to s1.
+                              if (rowc > rr) 
+                                        for cold =0 to n-1
+                                                      copy values of c2 (rowc, cold) to s1.
+              jf(x>=5)
+                    for c=0 to n-1 and d=0 to m-1
+                           if (rowc < rr) 
+                                    for cold =0 to n-1
+                                            copy values of c2 (rowc, cold) to s1.
+                              if (rowc = rr) 
+                                        for cold =0 to rc-1
+                                                      copy values of c2 (rowc, cold) to s1.
+                                        for cold =rc to n-1
+                                                      copy values of c1(rowc, cold) to s1.
+                              if (rowc > rr) 
+                                        for cold =0 to n-1
+                                                      copy values of c1 (rowc, cold) to s1.
+              Repair the new solution by following Step7.
+
+Step7. for i=0 to m-1
+                   find the number of bins z in which the object is placed.
+                   if(z==0)
+                            Randomly generate a bin between 0 to n-1.
+                             if (weight of given item<=left bin weight of randomly selected bin)
+                                       place the given item in selected bin
+                                       left weight of bin=left weight of bin-weight of given item
+                             else generate other bin and repeat the process
+                    else if (z=2)
+                            delete the item from the bin with more left capacity.
+                            Update the left capacity of that bin.
+            if(fitness of new solution>fitness of solution i)
+                      replace the solution i with the new solution.
+            Calculate the fitness of each solution in population after employed bee function using step4.
+
+Step8. send onlooker bees
+             Generate a random float variable v1 between 0 to 0.5.
+             for i=0 to initialsolution-1
+                     if(v<selection probability of solution i)
+                                Generate a new solution from solution i by following step4.
+                                Repair the newly generated solution by using step6. 
+             if(fitness of new solution>fitness of solution i)
+                     replace the solution i with the new solution.
+             else increase the trial value of solution i.
+             if(trial value of solution i>3)
+                   call the scout bee function.
+             Calculate the fitness of each solution in population after onlooker bee function using step4.
+
+Step9. send scout bees
+             Randomly generate a new solution and replace the solution with it.
+             Calculate the fitness of each solution in population after scout bee function using step4.
+
+Step10. Repeat the cycles until the stopping criteria is met.
+               Select the solution with the best fitness value as the final solution.
