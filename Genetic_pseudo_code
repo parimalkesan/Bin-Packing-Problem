@@ -1,0 +1,71 @@
+Let there be m objects and n bins where k is maximum capacity of each bin.
+Step-1. for i=0 to m-1
+                  Assign weights to item in the range of 1 to 20.
+Step-2. for i=0 to n-1
+                  Initialize weight of each bin to 50
+Step-3. for i=0 to n-1
+                  for k=0 to m-1
+                         generate a random bin between 0 to n-1 
+                          if(weight of given item<=left bin weight of randomly selected bin)
+                                       place the given item in selected bin
+                                       left weight of bin=left weight of bin-weight of given item
+                          else generate other bin and repeat the process
+                   if(i==n) 
+                         stop the algorithm.
+
+Step-4. for i=0 to n-1
+                   for j=i+1 to n-1
+                          select 2 solutions Ci and Cj from initial solutions. s1 and s2 are crossover solutions
+                          generate two random variables rr and rc between 0 to m-1 and n-1 respectively.
+                         for c=0 to n-1 and d=0 to m-1
+                               if (rowc < rr) 
+                                        for cold =0 to n-1
+                                                      copy values of Ci (rowc, cold) to s1 and Cj(rowc ,cold) to s2.
+                              if (rowc = rr) 
+                                        for cold =0 to rc-1
+                                                      copy values of Ci (rowc, cold) to s1 and Cj(rowc ,cold) to s2.
+                                        for cold =rc to n-1
+                                                      copy values of Ci (rowc, cold) to s2 and Cj(rowc ,cold) to s1.
+                              if (rowc > rr) 
+                                        for cold =0 to n-1
+                                                      copy values of Ci (rowc, cold) to s2 and Cj(rowc ,cold) to s1.
+
+Step-5. for i=0 to crossover_solutions-1
+                          for j=0 to m-1
+                                      find the number of bins z in which the object is placed.
+                                      if(z==0)
+                                               Randomly generate a bin between 0 to n-1.
+                                               if (weight of given item<=left bin weight of randomly selected bin)
+                                                              place the given item in selected bin
+                                                              left weight of bin=left weight of bin-weight of given item
+                                               else generate other bin and repeat the process
+                                        else if (z=2)
+                                                 delete the item from the bin with more left capacity.
+                                                  Update the left capacity of that bin.
+
+Step-6. for i=0 to crossover_solutions-1
+                     Select a solution Ci from crossover solutions.
+                     generate a random variable mprob between 0 to 9;
+                     if( mprob<=mutationprobability)
+                                     generate two variables r1 and c1 between 0 to n-1 and 0 to m-1 respectively.
+                                     generate another pair of variables r2 and c2.
+                                      if(r1==c1 and r2==c2)
+                                                      Repeat and regenerate r2 and c2.
+                                      interchange Ci(r1,c1) and Ci(r2,c2).
+                                     Update the left bin capacities for the solution.
+                            
+Step-7. Repair the crossover solutions after mutation again.
+Step-8. Copy the initial and crossover solutions into totalsolutions.
+              for i=0 to totalsolutions-1
+                      if (bin weight==50)
+                                     Fitness value++
+                      Fitness of solution=fitness value
+
+Step-9. Select the top 10 solutions according to the fitness and copy the solutions into the initial population. 
+Repeat the cycles until stopping criteria is met.
+Step-10. Select the best solution from the solutions.
+                    
+
+
+                      
+                
